@@ -29,21 +29,19 @@ public class ClienteDialog extends JDialog {
 
     private void initComponents() {
         setLayout(null);
-        setSize(400, 450); // Aumentamos el alto para asegurar que los botones sean visibles
+        setSize(400, 450); 
         setLocationRelativeTo(null);
         setResizable(false);
         getContentPane().setBackground(Color.WHITE);
 
-        // Título
         JLabel titulo = new JLabel(cliente == null ? "Nuevo Cliente" : "Editar Cliente");
         titulo.setFont(new Font("Arial", Font.BOLD, 18));
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
         titulo.setBounds(0, 20, 400, 30);
         add(titulo);
 
-        // Campos con etiquetas
         int y = 70;
-        int espaciado = 45; // Aumentamos el espaciado entre campos
+        int espaciado = 45; 
 
         agregarCampo("Cédula:", txtCedula = new JTextField(), 20, y);
         y += espaciado;
@@ -57,9 +55,8 @@ public class ClienteDialog extends JDialog {
         y += espaciado;
         agregarCampo("Email:", txtEmail = new JTextField(), 20, y);
 
-        // Panel de botones - Ajustamos la posición Y para que quede visible
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
-        panelBotones.setBounds(0, 350, 400, 50); // Ajustamos el alto del panel y su posición
+        panelBotones.setBounds(0, 350, 400, 50); 
         panelBotones.setBackground(Color.WHITE);
 
         JButton btnCancelar = crearBoton("Cancelar");

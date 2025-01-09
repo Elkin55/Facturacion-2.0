@@ -17,7 +17,6 @@ public class SistemaController {
         facturas = new ArrayList<>();
     }
 
-    // Métodos para Cliente
     public void agregarCliente(Cliente cliente) {
         if (buscarCliente(cliente.getCedula()) == null) {
             clientes.add(cliente);
@@ -48,7 +47,6 @@ public class SistemaController {
         return new ArrayList<>(clientes);
     }
 
-    // Métodos para Producto
     public void agregarProducto(Producto producto) {
         if (buscarProducto(producto.getCodigo()) == null) {
             productos.add(producto);
@@ -79,7 +77,6 @@ public class SistemaController {
         return new ArrayList<>(productos);
     }
 
-    // Métodos para Factura
     public Factura crearFactura(Cliente cliente) {
         Factura factura = new Factura(numeroFactura++, cliente);
         facturas.add(factura);
@@ -89,8 +86,7 @@ public class SistemaController {
     public void anularFactura(int numero) {
         Factura factura = buscarFactura(numero);
         if (factura != null && !factura.isAnulada()) {
-            factura.setAnulada(true);
-            // Devolver productos al inventario
+            factura.setAnulada(true);      
             for (DetalleFactura detalle : factura.getDetalles()) {
                 Producto producto = detalle.getProducto();
                 producto.setStock(producto.getStock() + detalle.getCantidad());

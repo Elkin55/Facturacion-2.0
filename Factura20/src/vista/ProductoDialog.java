@@ -27,21 +27,20 @@ public class ProductoDialog extends JDialog {
 
     private void initComponents() {
         setLayout(null);
-        setSize(400, 350); // Aumentamos el alto para asegurar que los botones sean visibles
+        setSize(400, 350); 
         setLocationRelativeTo(null);
         setResizable(false);
         getContentPane().setBackground(Color.WHITE);
 
-        // Título
         JLabel titulo = new JLabel(producto == null ? "Nuevo Producto" : "Editar Producto");
         titulo.setFont(new Font("Arial", Font.BOLD, 18));
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
         titulo.setBounds(0, 20, 400, 30);
         add(titulo);
 
-        // Campos con etiquetas
+
         int y = 70;
-        int espaciado = 45; // Aumentamos el espaciado entre campos
+        int espaciado = 45; 
 
         agregarCampo("Código:", txtCodigo = new JTextField(), 20, y);
         y += espaciado;
@@ -51,9 +50,9 @@ public class ProductoDialog extends JDialog {
         y += espaciado;
         agregarCampo("Stock:", txtStock = new JTextField(), 20, y);
 
-        // Panel de botones - Posición fija en la parte inferior
+ 
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
-        panelBotones.setBounds(0, 250, 400, 50); // Posición y tamaño fijos
+        panelBotones.setBounds(0, 250, 400, 50); 
         panelBotones.setBackground(Color.WHITE);
 
         JButton btnCancelar = crearBoton("Cancelar");
@@ -98,7 +97,6 @@ public class ProductoDialog extends JDialog {
         return boton;
     }
 
-    // El resto de los métodos se mantienen igual
     private void cargarDatosProducto() {
         if (producto != null) {
             txtCodigo.setText(producto.getCodigo());

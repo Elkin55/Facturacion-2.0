@@ -19,7 +19,6 @@ public class DetalleFactura {
         total = subtotal + iva;
     }
 
-    // Getters
     public Producto getProducto() { return producto; }
     public int getCantidad() { return cantidad; }
     public double getSubtotal() { return subtotal; }

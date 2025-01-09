@@ -29,7 +29,6 @@ public class ClientesInternalFrame extends JInternalFrame {
         setLayout(new BorderLayout(10, 10));
         setBackground(Color.WHITE);
 
-        // Panel superior
         JPanel panelSuperior = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
         panelSuperior.setBackground(Color.WHITE);
         panelSuperior.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -40,12 +39,11 @@ public class ClientesInternalFrame extends JInternalFrame {
 
         add(panelSuperior, BorderLayout.NORTH);
 
-        // Panel central (tabla)
+        
         JPanel panelCentral = new JPanel(new BorderLayout());
         panelCentral.setBackground(Color.WHITE);
         panelCentral.setBorder(BorderFactory.createEmptyBorder(0, 5, 5, 5));
 
-        // Tabla
         String[] columnas = {"Cédula", "Nombres", "Apellidos", "Acciones"};
         modeloTabla = new DefaultTableModel(columnas, 0) {
             @Override
@@ -55,7 +53,6 @@ public class ClientesInternalFrame extends JInternalFrame {
         };
         tablaClientes = new JTable(modeloTabla);
         
-        // Estilo de la tabla
         tablaClientes.setShowGrid(true);
         tablaClientes.setGridColor(BORDE_GRIS);
         tablaClientes.setRowHeight(35);
@@ -63,7 +60,6 @@ public class ClientesInternalFrame extends JInternalFrame {
         tablaClientes.setSelectionBackground(new Color(232, 240, 254));
         tablaClientes.setSelectionForeground(Color.BLACK);
 
-        // Renderer para las columnas normales
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
         renderer.setBackground(Color.WHITE);
         
@@ -71,7 +67,6 @@ public class ClientesInternalFrame extends JInternalFrame {
             tablaClientes.getColumnModel().getColumn(i).setCellRenderer(renderer);
         }
 
-        // Renderer para la columna de acciones
         TableColumn columnAcciones = tablaClientes.getColumnModel().getColumn(3);
         columnAcciones.setCellRenderer(new DefaultTableCellRenderer() {
             private JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
@@ -93,7 +88,6 @@ public class ClientesInternalFrame extends JInternalFrame {
             }
         });
 
-        // Manejador de clics en la tabla
         tablaClientes.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

@@ -29,12 +29,10 @@ public class FacturasInternalFrame extends JInternalFrame {
         setLayout(new BorderLayout(10, 10));
         setBackground(Color.WHITE);
 
-        // Panel principal con padding
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
         mainPanel.setBackground(Color.WHITE);
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Tabla de facturas
         String[] columnas = {"No. Factura", "Fecha", "Cliente", "Total", "Estado", "Acciones"};
         modeloTabla = new DefaultTableModel(columnas, 0) {
             @Override
@@ -44,7 +42,6 @@ public class FacturasInternalFrame extends JInternalFrame {
         };
         tablaFacturas = new JTable(modeloTabla);
         
-        // Estilo de la tabla
         tablaFacturas.setShowGrid(true);
         tablaFacturas.setGridColor(BORDE_GRIS);
         tablaFacturas.setRowHeight(35);
@@ -52,7 +49,6 @@ public class FacturasInternalFrame extends JInternalFrame {
         tablaFacturas.setSelectionBackground(new Color(232, 240, 254));
         tablaFacturas.setSelectionForeground(Color.BLACK);
 
-        // Renderer para formato de moneda y estados
         DefaultTableCellRenderer moneyRenderer = new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
@@ -70,13 +66,11 @@ public class FacturasInternalFrame extends JInternalFrame {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 
-        // Configurar renderers
-        tablaFacturas.getColumnModel().getColumn(0).setCellRenderer(centerRenderer); // No. Factura
-        tablaFacturas.getColumnModel().getColumn(1).setCellRenderer(centerRenderer); // Fecha
-        tablaFacturas.getColumnModel().getColumn(3).setCellRenderer(moneyRenderer); // Total
-        tablaFacturas.getColumnModel().getColumn(4).setCellRenderer(centerRenderer); // Estado
+        tablaFacturas.getColumnModel().getColumn(0).setCellRenderer(centerRenderer); 
+        tablaFacturas.getColumnModel().getColumn(1).setCellRenderer(centerRenderer); 
+        tablaFacturas.getColumnModel().getColumn(3).setCellRenderer(moneyRenderer); 
+        tablaFacturas.getColumnModel().getColumn(4).setCellRenderer(centerRenderer); 
 
-        // Manejador de clics para las acciones
         tablaFacturas.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -84,13 +78,12 @@ public class FacturasInternalFrame extends JInternalFrame {
                 int row = e.getY() / tablaFacturas.getRowHeight();
 
                 if (row < tablaFacturas.getRowCount() && row >= 0 && 
-                    column == 5) { // Columna de acciones
+                    column == 5) { 
                     mostrarOpcionesFactura(row);
                 }
             }
         });
 
-        // ScrollPane para la tabla
         JScrollPane scrollPane = new JScrollPane(tablaFacturas);
         scrollPane.setBorder(BorderFactory.createLineBorder(BORDE_GRIS));
         mainPanel.add(scrollPane, BorderLayout.CENTER);

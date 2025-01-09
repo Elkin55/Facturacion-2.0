@@ -40,12 +40,10 @@ public class FacturacionInternalFrame extends JInternalFrame {
         setLayout(new BorderLayout(10, 10));
         setBackground(Color.WHITE);
 
-        // Panel principal con padding
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
         mainPanel.setBackground(Color.WHITE);
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Panel superior - datos de factura y cliente
         JPanel panelSuperior = new JPanel(new GridLayout(2, 1, 0, 10));
         panelSuperior.setBackground(Color.WHITE);
         panelSuperior.setBorder(BorderFactory.createCompoundBorder(
@@ -53,7 +51,6 @@ public class FacturacionInternalFrame extends JInternalFrame {
             BorderFactory.createEmptyBorder(10, 10, 10, 10)
         ));
 
-        // Panel datos factura
         JPanel panelDatosFactura = new JPanel(new GridLayout(1, 4, 10, 0));
         panelDatosFactura.setBackground(Color.WHITE);
         
@@ -62,11 +59,9 @@ public class FacturacionInternalFrame extends JInternalFrame {
         agregarCampo(panelDatosFactura, "Fecha:", txtFecha = new JTextField());
         txtFecha.setEditable(false);
 
-        // Panel datos cliente
         JPanel panelCliente = new JPanel(new GridLayout(1, 3, 10, 0));
         panelCliente.setBackground(Color.WHITE);
 
-        // Panel para cédula y botón buscar
         JPanel panelCedula = new JPanel(new BorderLayout(5, 0));
         panelCedula.setBackground(Color.WHITE);
         agregarCampo(panelCedula, "Cédula Cliente:", txtCedulaCliente = new JTextField());
@@ -82,7 +77,6 @@ public class FacturacionInternalFrame extends JInternalFrame {
 
         mainPanel.add(panelSuperior, BorderLayout.NORTH);
 
-        // Panel central - productos
         JPanel panelCentral = new JPanel(new BorderLayout(0, 10));
         panelCentral.setBackground(Color.WHITE);
         panelCentral.setBorder(BorderFactory.createCompoundBorder(
@@ -90,7 +84,6 @@ public class FacturacionInternalFrame extends JInternalFrame {
             BorderFactory.createEmptyBorder(10, 10, 10, 10)
         ));
 
-        // Panel para agregar productos
         JPanel panelAgregarProducto = new JPanel(new GridLayout(1, 5, 10, 0));
         panelAgregarProducto.setBackground(Color.WHITE);
         
@@ -105,7 +98,6 @@ public class FacturacionInternalFrame extends JInternalFrame {
 
         panelCentral.add(panelAgregarProducto, BorderLayout.NORTH);
 
-        // Tabla de productos
         String[] columnas = {"Código", "Producto", "Cantidad", "Precio Unit.", "Subtotal", "IVA", "Total"};
         modeloTabla = new DefaultTableModel(columnas, 0) {
             @Override
@@ -115,7 +107,6 @@ public class FacturacionInternalFrame extends JInternalFrame {
         };
         tablaProductos = new JTable(modeloTabla);
         
-        // Estilo de la tabla
         tablaProductos.setShowGrid(true);
         tablaProductos.setGridColor(BORDE_GRIS);
         tablaProductos.setRowHeight(30);
@@ -123,7 +114,6 @@ public class FacturacionInternalFrame extends JInternalFrame {
         tablaProductos.setSelectionBackground(new Color(232, 240, 254));
         tablaProductos.setSelectionForeground(Color.BLACK);
 
-        // Renderer para formato de moneda
         DefaultTableCellRenderer moneyRenderer = new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
@@ -138,10 +128,9 @@ public class FacturacionInternalFrame extends JInternalFrame {
             }
         };
 
-        // Aplicar renderers
         for (int i = 0; i < tablaProductos.getColumnCount(); i++) {
             DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
-            if (i >= 3) { // Columnas numéricas
+            if (i >= 3) { 
                 renderer = moneyRenderer;
             }
             tablaProductos.getColumnModel().getColumn(i).setCellRenderer(renderer);
@@ -151,7 +140,6 @@ public class FacturacionInternalFrame extends JInternalFrame {
         scrollPane.setBorder(BorderFactory.createLineBorder(BORDE_GRIS));
         panelCentral.add(scrollPane, BorderLayout.CENTER);
 
-        // Panel de totales
         JPanel panelTotales = new JPanel(new GridLayout(3, 2, 5, 5));
         panelTotales.setBackground(Color.WHITE);
         panelTotales.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
@@ -171,7 +159,6 @@ public class FacturacionInternalFrame extends JInternalFrame {
         panelCentral.add(panelTotalesWrapper, BorderLayout.SOUTH);
         mainPanel.add(panelCentral, BorderLayout.CENTER);
 
-        // Panel de botones
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
         panelBotones.setBackground(Color.WHITE);
         panelBotones.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
@@ -187,10 +174,8 @@ public class FacturacionInternalFrame extends JInternalFrame {
         
         mainPanel.add(panelBotones, BorderLayout.SOUTH);
 
-        // Agregar panel principal
         add(mainPanel);
 
-        // Agregar listeners
         btnBuscarCliente.addActionListener(e -> mostrarDialogoBusquedaCliente());
         btnBuscarProducto.addActionListener(e -> mostrarDialogoBusquedaProducto());
         btnAgregarProducto.addActionListener(e -> agregarProductoAFactura());
@@ -222,7 +207,6 @@ public class FacturacionInternalFrame extends JInternalFrame {
             }
         });
 
-        // Iniciar con una nueva factura
         nuevaFactura();
     }
 
@@ -283,12 +267,10 @@ public class FacturacionInternalFrame extends JInternalFrame {
         dialogo.setLayout(new BorderLayout(10, 10));
         dialogo.setSize(500, 400);
 
-        // Panel principal con padding
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         mainPanel.setBackground(Color.WHITE);
 
-        // Crear tabla de clientes
         String[] columnas = {"Cédula", "Nombres", "Apellidos"};
         DefaultTableModel modeloTablaClientes = new DefaultTableModel(columnas, 0) {
             @Override
@@ -298,7 +280,6 @@ public class FacturacionInternalFrame extends JInternalFrame {
         };
         JTable tablaClientes = new JTable(modeloTablaClientes);
         
-        // Estilo de la tabla
         tablaClientes.setShowGrid(true);
         tablaClientes.setGridColor(BORDE_GRIS);
         tablaClientes.setRowHeight(30);
@@ -306,7 +287,6 @@ public class FacturacionInternalFrame extends JInternalFrame {
         tablaClientes.setSelectionBackground(new Color(232, 240, 254));
         tablaClientes.setSelectionForeground(Color.BLACK);
 
-        // Cargar datos de clientes
         List<Cliente> clientes = controller.getClientes();
         for (Cliente cliente : clientes) {
             Object[] fila = {
@@ -317,12 +297,10 @@ public class FacturacionInternalFrame extends JInternalFrame {
             modeloTablaClientes.addRow(fila);
         }
 
-        // ScrollPane para la tabla
         JScrollPane scrollPane = new JScrollPane(tablaClientes);
         scrollPane.setBorder(BorderFactory.createLineBorder(BORDE_GRIS));
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // Botón seleccionar
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
         panelBotones.setBackground(Color.WHITE);
         panelBotones.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
@@ -355,12 +333,10 @@ public class FacturacionInternalFrame extends JInternalFrame {
         dialogo.setLayout(new BorderLayout(10, 10));
         dialogo.setSize(600, 400);
 
-        // Panel principal con padding
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         mainPanel.setBackground(Color.WHITE);
 
-        // Tabla de productos
         String[] columnas = {"Código", "Nombre", "Precio", "Stock"};
         DefaultTableModel modeloTablaProductos = new DefaultTableModel(columnas, 0) {
             @Override
@@ -370,7 +346,6 @@ public class FacturacionInternalFrame extends JInternalFrame {
         };
         JTable tablaProductosBusqueda = new JTable(modeloTablaProductos);
 
-        // Estilo de la tabla
         tablaProductosBusqueda.setShowGrid(true);
         tablaProductosBusqueda.setGridColor(BORDE_GRIS);
         tablaProductosBusqueda.setRowHeight(30);
@@ -378,7 +353,6 @@ public class FacturacionInternalFrame extends JInternalFrame {
         tablaProductosBusqueda.setSelectionBackground(new Color(232, 240, 254));
         tablaProductosBusqueda.setSelectionForeground(Color.BLACK);
 
-        // Renderer para la columna de precio
         DefaultTableCellRenderer moneyRenderer = new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
@@ -394,7 +368,6 @@ public class FacturacionInternalFrame extends JInternalFrame {
         };
         tablaProductosBusqueda.getColumnModel().getColumn(2).setCellRenderer(moneyRenderer);
 
-        // Cargar datos de productos
         for (Producto producto : controller.getProductos()) {
             Object[] fila = {
                 producto.getCodigo(),
@@ -405,12 +378,11 @@ public class FacturacionInternalFrame extends JInternalFrame {
             modeloTablaProductos.addRow(fila);
         }
 
-        // ScrollPane para la tabla
         JScrollPane scrollPane = new JScrollPane(tablaProductosBusqueda);
         scrollPane.setBorder(BorderFactory.createLineBorder(BORDE_GRIS));
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // Panel de botones
+ 
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
         panelBotones.setBackground(Color.WHITE);
         panelBotones.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
@@ -579,7 +551,6 @@ public class FacturacionInternalFrame extends JInternalFrame {
         
         facturaActual = controller.crearFactura(cliente);
 
-        // Agregar productos
         for (int i = 0; i < modeloTabla.getRowCount(); i++) {
             String codigo = (String) modeloTabla.getValueAt(i, 0);
             int cantidad = (int) modeloTabla.getValueAt(i, 2);
@@ -589,7 +560,6 @@ public class FacturacionInternalFrame extends JInternalFrame {
                 DetalleFactura detalle = new DetalleFactura(producto, cantidad);
                 facturaActual.getDetalles().add(detalle);
                 
-                // Actualizar stock
                 producto.setStock(producto.getStock() - cantidad);
             }
         }

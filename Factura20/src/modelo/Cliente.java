@@ -16,8 +16,6 @@ public class Cliente {
         this.telefono = telefono;
         this.email = email;
     }
-
-    // Getters and setters
     public String getCedula() { return cedula; }
     public void setCedula(String cedula) { this.cedula = cedula; }
     public String getNombres() { return nombres; }

@@ -25,7 +25,6 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Configurar JDesktopPane con fondo personalizado
         desktopPane = new JDesktopPane() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -33,7 +32,6 @@ public class MainFrame extends JFrame {
                 g.setColor(FONDO_VENTANA);
                 g.fillRect(0, 0, getWidth(), getHeight());
                 
-                // Dibujar un patrón de puntos suave en el fondo
                 g.setColor(new Color(240, 240, 240));
                 for (int x = 0; x < getWidth(); x += 20) {
                     for (int y = 0; y < getHeight(); y += 20) {
@@ -50,13 +48,11 @@ public class MainFrame extends JFrame {
         menuBar.setBackground(FONDO_VENTANA);
         menuBar.setBorder(BorderFactory.createLineBorder(BORDE_GRIS));
         
-        // Menú Archivo
         JMenu archivo = createMenu("Archivo");
         JMenuItem salir = createMenuItem("Salir");
         salir.addActionListener(e -> confirmarSalir());
         archivo.add(salir);
         
-        // Menú Procesos
         JMenu procesos = createMenu("Procesos");
         JMenuItem clientes = createMenuItem("Clientes");
         JMenuItem productos = createMenuItem("Productos");
@@ -74,7 +70,6 @@ public class MainFrame extends JFrame {
         procesos.add(facturacion);
         procesos.add(listaFacturas);
         
-        // Menú Ayuda
         JMenu ayuda = createMenu("Ayuda");
         JMenuItem acerca = createMenuItem("Acerca de");
         acerca.addActionListener(e -> mostrarAcercaDe());
@@ -102,14 +97,12 @@ public class MainFrame extends JFrame {
     }
 
     private void customizeUI() {
-        // Establecer Look and Feel del sistema
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
         }
         
-        // Configurar colores y fuentes por defecto
         UIManager.put("Panel.background", FONDO_VENTANA);
         UIManager.put("OptionPane.background", FONDO_VENTANA);
         UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 14));
@@ -137,7 +130,6 @@ public class MainFrame extends JFrame {
     }
 
     private void agregarVentanaInterna(JInternalFrame frame) {
-        // Verificar si ya existe una ventana del mismo tipo
         for (JInternalFrame ventana : desktopPane.getAllFrames()) {
             if (ventana.getClass().equals(frame.getClass())) {
                 try {
@@ -149,12 +141,10 @@ public class MainFrame extends JFrame {
             }
         }
         
-        // Si no existe, agregar la nueva ventana
         desktopPane.add(frame);
         centrarVentana(frame);
         frame.setVisible(true);
 
-        // Intentar seleccionar la ventana
         try {
             frame.setSelected(true);
         } catch (java.beans.PropertyVetoException e) {
@@ -197,10 +187,8 @@ public class MainFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        // Ejecutar la aplicación en el EDT
         SwingUtilities.invokeLater(() -> {
             try {
-                // Establecer Look and Feel del sistema
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             } catch (Exception e) {
                 e.printStackTrace();

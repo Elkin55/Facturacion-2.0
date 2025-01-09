@@ -28,12 +28,10 @@ public class DetalleFacturaDialog extends JDialog {
         setLayout(new BorderLayout(10, 10));
         getContentPane().setBackground(Color.WHITE);
 
-        // Panel principal con padding
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
         mainPanel.setBackground(Color.WHITE);
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Panel de encabezado
         JPanel panelEncabezado = new JPanel(new GridLayout(3, 2, 10, 5));
         panelEncabezado.setBackground(Color.WHITE);
         panelEncabezado.setBorder(BorderFactory.createCompoundBorder(
@@ -41,7 +39,6 @@ public class DetalleFacturaDialog extends JDialog {
             BorderFactory.createEmptyBorder(10, 10, 10, 10)
         ));
 
-        // Información de la factura
         agregarCampoInfo(panelEncabezado, "No. Factura:", String.valueOf(factura.getNumero()));
         agregarCampoInfo(panelEncabezado, "Fecha:", sdf.format(factura.getFecha()));
         agregarCampoInfo(panelEncabezado, "Estado:", factura.isAnulada() ? "ANULADA" : "ACTIVA");
@@ -52,19 +49,16 @@ public class DetalleFacturaDialog extends JDialog {
 
         mainPanel.add(panelEncabezado, BorderLayout.NORTH);
 
-        // Tabla de detalles
         String[] columnas = {"Código", "Producto", "Cantidad", "Precio Unit.", "Subtotal", "IVA", "Total"};
         modeloTabla = new DefaultTableModel(columnas, 0);
         tablaDetalles = new JTable(modeloTabla);
         
-        // Estilo de la tabla
         tablaDetalles.setShowGrid(true);
         tablaDetalles.setGridColor(BORDE_GRIS);
         tablaDetalles.setRowHeight(30);
         tablaDetalles.setFont(new Font("Arial", Font.PLAIN, 12));
         tablaDetalles.setEnabled(false);
 
-        // Renderer para moneda
         DefaultTableCellRenderer moneyRenderer = new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
@@ -79,12 +73,10 @@ public class DetalleFacturaDialog extends JDialog {
             }
         };
 
-        // Aplicar renderer a columnas numéricas
         for (int i = 3; i < tablaDetalles.getColumnCount(); i++) {
             tablaDetalles.getColumnModel().getColumn(i).setCellRenderer(moneyRenderer);
         }
 
-        // Cargar detalles
         for (DetalleFactura detalle : factura.getDetalles()) {
             Object[] fila = {
                 detalle.getProducto().getCodigo(),
@@ -102,7 +94,6 @@ public class DetalleFacturaDialog extends JDialog {
         scrollPane.setBorder(BorderFactory.createLineBorder(BORDE_GRIS));
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // Panel de totales
         JPanel panelTotales = new JPanel(new GridLayout(3, 2, 5, 5));
         panelTotales.setBackground(Color.WHITE);
         panelTotales.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
@@ -119,7 +110,6 @@ public class DetalleFacturaDialog extends JDialog {
 
         add(mainPanel);
 
-        // Botón cerrar
         JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelBoton.setBackground(Color.WHITE);
         JButton btnCerrar = new JButton("Cerrar");

@@ -31,7 +31,6 @@ public class Factura {
         total = subtotal + iva;
     }
 
-    // Getters and setters
     public int getNumero() { return numero; }
     public Date getFecha() { return fecha; }
     public Cliente getCliente() { return cliente; }
